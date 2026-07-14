@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gameManager
   pelotaPrefab: {fileID: 5257679240372658073, guid: 72b5ce3b34d3d46e19500b302b3ae4c7, type: 3}
+  ladrilloAzul: {fileID: 658382776094537719, guid: 676e6b5fb198df1abb811cddb762136c, type: 3}
 --- !u!4 &812207243
 Transform:
   m_ObjectHideFlags: 0
