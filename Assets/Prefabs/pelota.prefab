@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1988210896784646657}
   m_Layer: 0
   m_Name: pelota
-  m_TagString: Untagged
+  m_TagString: pelota
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,3 +169,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24e3dd2d250584da923df5d00eb7c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::movimientoPelota
+  velocidad: 10

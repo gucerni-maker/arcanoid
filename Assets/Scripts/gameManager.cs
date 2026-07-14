@@ -4,13 +4,15 @@ public class gameManager : MonoBehaviour
 {
     public GameObject pelotaPrefab;
     public GameObject ladrilloAzul;
+    public GameObject ladrilloVerde;
+    public GameObject ladrilloRojo;
 
-    private float[] bloqueAzul = {-5f, -3f, -1f, 1f, 3f, 5f}; 
+    private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
     void Start()
     {
         SpawnPelota();
-        CreaLadrilloAzul();
+        CreaLadrillo();
     }
 
     // Update is called once per frame
@@ -24,9 +26,11 @@ public class gameManager : MonoBehaviour
         Instantiate(pelotaPrefab, new Vector2(0,-3.65f), Quaternion.identity);
     }
 
-    public void CreaLadrilloAzul(){
-        for(int i = 0; i < bloqueAzul.Length; i++){
-            Instantiate(ladrilloAzul, new Vector2(bloqueAzul[i], 2.14f), Quaternion.identity);
+    public void CreaLadrillo(){
+        for(int i = 0; i < bloquePosX.Length; i++){
+            Instantiate(ladrilloAzul, new Vector2(bloquePosX[i], 2.14f), Quaternion.identity);
+            Instantiate(ladrilloVerde, new Vector2(bloquePosX[i], 2.88f), Quaternion.identity);
+            Instantiate(ladrilloRojo, new Vector2(bloquePosX[i], 3.62f), Quaternion.identity);
         }
     }
 }

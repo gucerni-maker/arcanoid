@@ -27,4 +27,8 @@ public class movimientoPelota : MonoBehaviour
         rb.linearVelocity = direccion * velocidad;
     }
 
+
+
+
+
 }
