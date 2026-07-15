@@ -7,6 +7,7 @@ TagManager:
   - bloqueAzul
   - pelota
   - bloqueVerde
+  - bordeInferior
   layers:
   - Default
   - TransparentFX

@@ -27,7 +27,11 @@ public class movimientoPelota : MonoBehaviour
         rb.linearVelocity = direccion * velocidad;
     }
 
-
+    void OnTriggerEnter2D(Collider2D other){
+        if (other.CompareTag("bordeInferior")){
+            Destroy(gameObject);
+        }
+    }        
 
 
 
