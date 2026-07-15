@@ -3,10 +3,11 @@ using UnityEngine;
 public class ladrilloRojo : MonoBehaviour
 {
     private int golpe = 0;
+    private SpriteRenderer cambiaColor;
 
     void Start()
     {
-        
+        cambiaColor = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -17,6 +18,13 @@ public class ladrilloRojo : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision){
         golpe++;
+        if(golpe == 1){
+            cambiaColor.color = Color.green;
+        }
+        if(golpe == 2){
+            cambiaColor.color = Color.blue;
+        }
+
         if (collision.gameObject.CompareTag("pelota") && golpe == 3){//Se destruye a los 3 golpes
             Destroy(gameObject);
             golpe = 0;
