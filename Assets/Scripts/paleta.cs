@@ -16,7 +16,7 @@ public class paleta : MonoBehaviour
     {
         moverPaleta();
 
-        //controla que la paleta no pase el limite superior e inferior
+        //controla que la paleta no pase el limite izquierdo y derecho
         if (transform.position.x < limiteIzq){
             transform.position = new Vector2(limiteIzq, transform.position.y);
         }
@@ -27,15 +27,17 @@ public class paleta : MonoBehaviour
 
     void moverPaleta(){
         float movimiento = 0;
-
         if (Input.GetKey(KeyCode.RightArrow)){
             movimiento = 1;
         }
-
         if (Input.GetKey(KeyCode.LeftArrow)){
             movimiento = -1;
         }
-
         transform.Translate(Vector2.right * movimiento * velocidad * Time.deltaTime);
+    }
+
+    //para indicarle al gameManager la posicion de la paleta
+    public float ObtenerPosicionX(){
+        return transform.position.x;
     }
 }

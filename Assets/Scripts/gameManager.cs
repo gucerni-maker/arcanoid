@@ -6,9 +6,11 @@ public class gameManager : MonoBehaviour
     public GameObject ladrilloAzul;
     public GameObject ladrilloVerde;
     public GameObject ladrilloRojo;
+    public paleta posicionPaleta; //debe tener el mismo nombre que el script para poder referenciar
     private bool esperandoInput = false;
 
 
+ 
     private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
     void Start()
@@ -30,14 +32,13 @@ public class gameManager : MonoBehaviour
     public void PelotaPerdida()
     {
         // AQUÍ MÁS ADELANTE PODRÁS RESTAR UNA VIDA: vidas--;
-        
         esperandoInput = true;
-        Debug.Log("¡Pelota perdida! Presiona ESPACIO para lanzar la siguiente.");
     }
 
     //crea una pelota al inicio y luego de cada gol
     public void SpawnPelota(){
-        Instantiate(pelotaPrefab, new Vector2(0,-3.65f), Quaternion.identity);
+        float posicionX = posicionPaleta.ObtenerPosicionX(); //obtenemos la posicion x de la paleta
+        Instantiate(pelotaPrefab, new Vector2(posicionX,-3.65f), Quaternion.identity);
     }
 
     public void CreaLadrillo(){
