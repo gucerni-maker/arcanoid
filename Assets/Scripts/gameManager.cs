@@ -6,6 +6,8 @@ public class gameManager : MonoBehaviour
     public GameObject ladrilloAzul;
     public GameObject ladrilloVerde;
     public GameObject ladrilloRojo;
+    private bool esperandoInput = false;
+
 
     private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
@@ -18,7 +20,19 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         if (esperandoInput && Input.GetKeyDown(KeyCode.Space)){
+            SpawnPelota();
+            esperandoInput = false; // Ya dejamos de esperar
+        }
+    }
+
+    // Este método es llamado por la pelota cuando cae al vacío
+    public void PelotaPerdida()
+    {
+        // AQUÍ MÁS ADELANTE PODRÁS RESTAR UNA VIDA: vidas--;
         
+        esperandoInput = true;
+        Debug.Log("¡Pelota perdida! Presiona ESPACIO para lanzar la siguiente.");
     }
 
     //crea una pelota al inicio y luego de cada gol

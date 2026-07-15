@@ -8,6 +8,7 @@ TagManager:
   - pelota
   - bloqueVerde
   - bordeInferior
+  - cambiaVariable
   layers:
   - Default
   - TransparentFX

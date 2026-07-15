@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class movimientoPelota : MonoBehaviour
 {
-    
     public float velocidad = 10f;
     private Rigidbody2D rb;
-
-
+    private gameManager gm;
+  
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        //Nos comunicamos con el gameManager
+        gm = FindFirstObjectByType<gameManager>();
+
         LanzarPelota();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void LanzarPelota(){
@@ -29,10 +31,11 @@ public class movimientoPelota : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("bordeInferior")){
-            Destroy(gameObject);
+            if (gm != null){
+                gm.PelotaPerdida(); 
+            }
+
+           Destroy(gameObject);
         }
     }        
-
-
-
 }
