@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     private Label scoreText1;
     private Label vidasRestantes;
     private Label finDelJuego;
+    private Label continuarJuego;
     private bool esperandoInput = false;
     private int puntajeTotal = 0;
     private int cantidadVidas = 3;
@@ -26,7 +27,9 @@ public class gameManager : MonoBehaviour
         scoreText1 = uiDocument.rootVisualElement.Q<Label>("puntaje");
         vidasRestantes = uiDocument.rootVisualElement.Q<Label>("vidas");
         finDelJuego = uiDocument.rootVisualElement.Q<Label>("gameOver");
+        continuarJuego = uiDocument.rootVisualElement.Q<Label>("continuar");
         finDelJuego.style.display = DisplayStyle.None;
+        continuarJuego.style.display = DisplayStyle.None;
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class gameManager : MonoBehaviour
          if (esperandoInput && Input.GetKeyDown(KeyCode.Space) && cantidadVidas > 0){
             SpawnPelota();
             esperandoInput = false;
+            continuarJuego.style.display = DisplayStyle.None;
         }
     }
 
@@ -47,6 +51,9 @@ public class gameManager : MonoBehaviour
         
         if(cantidadVidas < 1){
             finDelJuego.style.display = DisplayStyle.Flex;
+        }
+        if(cantidadVidas > 0){
+            continuarJuego.style.display = DisplayStyle.Flex;
         }
     }
 
