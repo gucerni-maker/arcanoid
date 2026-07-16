@@ -26,6 +26,12 @@ public class ladrilloRojo : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("pelota") && golpe == 3){//Se destruye a los 3 golpes
+            //Nos comunicamos con el gameManager
+            gameManager gm = FindFirstObjectByType<gameManager>();
+
+            //Le decimos al gameManager que anote un punto
+            gm.PuntoLadrilloRojo();
+            
             Destroy(gameObject);
             golpe = 0;
         } 

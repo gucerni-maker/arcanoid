@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="PUNTOS" name="tituloPuntos" style="position: absolute; -unity-font-style: bold; top: 30px; left: 6px; color: rgb(255, 255, 255); font-size: 20px;"/>
+    <ui:Label text="0" name="puntaje" parse-escape-sequences="true" style="position: absolute; -unity-font-style: bold; color: rgb(255, 255, 255); top: 64px; left: 41px; font-size: 20px;"/>
+    <ui:Label text="NIVEL" name="tituloNivel" parse-escape-sequences="true" style="position: absolute; -unity-font-style: bold; font-size: 20px; color: rgb(255, 255, 255); left: 615px; top: 30px;"/>
+    <ui:Label text="1" name="nivel" style="position: absolute; font-size: 20px; color: rgb(255, 255, 255); top: 64px; left: 640px; -unity-font-style: bold;"/>
+    <ui:Label text="TIEMPO" name="tituloTiempo" style="position: absolute; top: 128px; left: 6px; font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);"/>
+    <ui:Label text="0" name="tiempo" style="position: absolute; -unity-font-style: bold; font-size: 20px; top: 165px; left: 41px; color: rgb(255, 255, 255);"/>
+    <ui:Label text="VIDAS" name="tituloVidas" style="position: absolute; font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold; top: 128px; left: 615px;"/>
+    <ui:Label text="3" name="vidas" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold; top: 165px; left: 640px;"/>
+</ui:UXML>

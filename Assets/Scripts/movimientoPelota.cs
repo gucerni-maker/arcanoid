@@ -39,9 +39,51 @@ public class movimientoPelota : MonoBehaviour
         }
     } 
 
+    // Corregimos el problema de rebote horizontal y agregamos deflexion a la paleta (si la pelota golpea el borde de la paleta, la pelota cambia su direccion)
     void OnCollisionEnter2D(Collision2D collision){
-        CorregirTrayectoriaHorizontal();
-    }    
+        // 1. Verificamos si lo que golpeamos es la paleta
+        if (collision.gameObject.CompareTag("paleta")){
+            AplicarDeflexionDePaleta(collision);
+        }
+        else{
+            // 2. Si es una pared o un ladrillo, aplicamos la corrección anti-horizontal
+            CorregirTrayectoriaHorizontal();
+        }
+    }  
+
+    void AplicarDeflexionDePaleta(Collision2D collision){
+        // A. Obtenemos el punto exacto donde la pelota tocó la paleta
+        ContactPoint2D contact = collision.contacts[0];
+
+        // B. Obtenemos el ancho real de la paleta (tamaño del collider * escala del objeto)
+        BoxCollider2D paddleCollider = collision.collider.GetComponent<BoxCollider2D>();
+        float anchoRealPaleta = paddleCollider.size.x * collision.transform.localScale.x;
+
+        // C. Calculamos la diferencia entre el punto de golpe y el centro de la paleta
+        float centroPaletaX = collision.transform.position.x;
+        float offsetDeGolpe = contact.point.x - centroPaletaX;
+
+        // D. Normalizamos ese valor para que esté entre -1 (borde izquierdo) y 1 (borde derecho)
+        float golpeNormalizado = offsetDeGolpe / (anchoRealPaleta / 2f);
+        
+        // Por seguridad, limitamos el valor entre -1 y 1 (por si la física genera un punto de contacto extraño)
+        golpeNormalizado = Mathf.Clamp(golpeNormalizado, -1f, 1f);
+
+        // E. Definimos el ángulo máximo de rebote (60 grados es un estándar muy bueno)
+        float anguloMaximoRebote = 60f;
+        
+        // Calculamos el ángulo final. Si golpeó el centro (0), el ángulo es 0.
+        float anguloDeRebote = golpeNormalizado * anguloMaximoRebote;
+
+        // F. Convertimos ese ángulo a una dirección Vector2.
+        // Matemáticamente: Seno para X, Coseno para Y. 
+        // A 0 grados, Seno(0)=0, Coseno(0)=1 -> Dirección (0, 1) que es recto hacia arriba.
+        float radianes = anguloDeRebote * Mathf.Deg2Rad;
+        Vector2 nuevaDireccion = new Vector2(Mathf.Sin(radianes), Mathf.Cos(radianes));
+
+        // G. Aplicamos la nueva dirección, manteniendo la velocidad constante
+        rb.linearVelocity = nuevaDireccion * velocidad;
+    }  
 
     void CorregirTrayectoriaHorizontal()
     {

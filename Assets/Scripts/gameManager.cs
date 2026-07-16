@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class gameManager : MonoBehaviour
 {
@@ -7,16 +8,19 @@ public class gameManager : MonoBehaviour
     public GameObject ladrilloVerde;
     public GameObject ladrilloRojo;
     public paleta posicionPaleta; //debe tener el mismo nombre que el script para poder referenciar
+    public UIDocument uiDocument;
+    private Label scoreText1;
+
     private bool esperandoInput = false;
-
-
- 
+    private int puntajeTotal = 0;
+    private Label puntaje;
     private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
     void Start()
     {
         SpawnPelota();
         CreaLadrillo();
+        scoreText1 = uiDocument.rootVisualElement.Q<Label>("puntaje");
     }
 
     // Update is called once per frame
@@ -24,7 +28,7 @@ public class gameManager : MonoBehaviour
     {
          if (esperandoInput && Input.GetKeyDown(KeyCode.Space)){
             SpawnPelota();
-            esperandoInput = false; // Ya dejamos de esperar
+            esperandoInput = false;
         }
     }
 
@@ -47,5 +51,19 @@ public class gameManager : MonoBehaviour
             Instantiate(ladrilloVerde, new Vector2(bloquePosX[i], 2.88f), Quaternion.identity);
             Instantiate(ladrilloRojo, new Vector2(bloquePosX[i], 3.62f), Quaternion.identity);
         }
+    }
+
+    //controla el puntaje de cada ladrillo
+    public void PuntoLadrilloAzul(){
+        puntajeTotal += 10;
+        scoreText1.text = puntajeTotal.ToString();
+    }
+    public void PuntoLadrilloVerde(){
+        puntajeTotal +=  20;
+        scoreText1.text = puntajeTotal.ToString();
+    }
+    public void PuntoLadrilloRojo(){
+        puntajeTotal +=  30;
+        scoreText1.text = puntajeTotal.ToString();
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - bloqueVerde
   - bordeInferior
   - cambiaVariable
+  - paleta
   layers:
   - Default
   - TransparentFX
