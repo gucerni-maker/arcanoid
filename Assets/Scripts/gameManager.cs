@@ -9,10 +9,13 @@ public class gameManager : MonoBehaviour
     public GameObject ladrilloRojo;
     public paleta posicionPaleta; //debe tener el mismo nombre que el script para poder referenciar
     public UIDocument uiDocument;
-    private Label scoreText1;
 
+    private Label scoreText1;
+    private Label vidasRestantes;
+    private Label finDelJuego;
     private bool esperandoInput = false;
     private int puntajeTotal = 0;
+    private int cantidadVidas = 3;
     private Label puntaje;
     private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
@@ -21,12 +24,15 @@ public class gameManager : MonoBehaviour
         SpawnPelota();
         CreaLadrillo();
         scoreText1 = uiDocument.rootVisualElement.Q<Label>("puntaje");
+        vidasRestantes = uiDocument.rootVisualElement.Q<Label>("vidas");
+        finDelJuego = uiDocument.rootVisualElement.Q<Label>("gameOver");
+        finDelJuego.style.display = DisplayStyle.None;
     }
 
     // Update is called once per frame
     void Update()
     {
-         if (esperandoInput && Input.GetKeyDown(KeyCode.Space)){
+         if (esperandoInput && Input.GetKeyDown(KeyCode.Space) && cantidadVidas > 0){
             SpawnPelota();
             esperandoInput = false;
         }
@@ -35,8 +41,13 @@ public class gameManager : MonoBehaviour
     // Este método es llamado por la pelota cuando cae al vacío
     public void PelotaPerdida()
     {
-        // AQUÍ MÁS ADELANTE PODRÁS RESTAR UNA VIDA: vidas--;
         esperandoInput = true;
+        cantidadVidas--;
+        vidasRestantes.text = cantidadVidas.ToString();
+        
+        if(cantidadVidas < 1){
+            finDelJuego.style.display = DisplayStyle.Flex;
+        }
     }
 
     //crea una pelota al inicio y luego de cada gol

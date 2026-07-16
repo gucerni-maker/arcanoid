@@ -6,5 +6,6 @@
     <ui:Label text="TIEMPO" name="tituloTiempo" style="position: absolute; top: 128px; left: 6px; font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);"/>
     <ui:Label text="0" name="tiempo" style="position: absolute; -unity-font-style: bold; font-size: 20px; top: 165px; left: 41px; color: rgb(255, 255, 255);"/>
     <ui:Label text="VIDAS" name="tituloVidas" style="position: absolute; font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold; top: 128px; left: 615px;"/>
-    <ui:Label text="3" name="vidas" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold; top: 165px; left: 640px;"/>
+    <ui:Label text="3" name="vidas" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold; top: 165px; left: 640px; position: absolute;"/>
+    <ui:Label text="Fin del juego" name="gameOver" style="position: absolute; justify-content: center; align-content: center; align-items: center; -unity-text-align: upper-center; -unity-font-style: bold-and-italic; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=041eb3c55be7c918686a33ef46aa5759&amp;type=3#NotInter-Regular&quot;); color: rgb(255, 0, 0); font-size: 60px; top: 157px; left: 151px;"/>
 </ui:UXML>
