@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;//requerido para usar SceneManager (reiniciar el juego)
 
 public class gameManager : MonoBehaviour
 {
@@ -9,15 +10,17 @@ public class gameManager : MonoBehaviour
     public GameObject ladrilloRojo;
     public paleta posicionPaleta; //debe tener el mismo nombre que el script para poder referenciar
     public UIDocument uiDocument;
-
+    
     private Label scoreText1;
     private Label vidasRestantes;
     private Label finDelJuego;
     private Label continuarJuego;
+    private Label puntaje;
+    private Button restartButton;
     private bool esperandoInput = false;
     private int puntajeTotal = 0;
     private int cantidadVidas = 3;
-    private Label puntaje;
+    
     private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
     void Start()
@@ -30,6 +33,9 @@ public class gameManager : MonoBehaviour
         continuarJuego = uiDocument.rootVisualElement.Q<Label>("continuar");
         finDelJuego.style.display = DisplayStyle.None;
         continuarJuego.style.display = DisplayStyle.None;
+        restartButton = uiDocument.rootVisualElement.Q<Button>("reiniciar");
+        restartButton.style.display = DisplayStyle.None;
+        restartButton.clicked += ReloadScene;
     }
 
     // Update is called once per frame
@@ -51,6 +57,7 @@ public class gameManager : MonoBehaviour
         
         if(cantidadVidas < 1){
             finDelJuego.style.display = DisplayStyle.Flex;
+            restartButton.style.display = DisplayStyle.Flex;
         }
         if(cantidadVidas > 0){
             continuarJuego.style.display = DisplayStyle.Flex;
@@ -83,5 +90,11 @@ public class gameManager : MonoBehaviour
     public void PuntoLadrilloRojo(){
         puntajeTotal +=  30;
         scoreText1.text = puntajeTotal.ToString();
+    }
+
+    //reinicia el juego
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
