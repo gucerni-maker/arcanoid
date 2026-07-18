@@ -179,3 +179,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9442a16fff30d81618d20418747c9f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ladrilloAzul
+  sonidoLadrillo: {fileID: 8300000, guid: 325bb38fe2cd87229946146512e18925, type: 3}

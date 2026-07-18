@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;//requerido para usar SceneManager (reiniciar 
 
 public class gameManager : MonoBehaviour
 {
+
+    public AudioClip sonidoLadrillo;//No olvidar agregar un componente Audio Source al prefab del ladrillo (sin ninguna modificacion, es requerido para dar sonido)
     public GameObject pelotaPrefab;
     public GameObject ladrilloAzul;
     public GameObject ladrilloVerde;
@@ -22,18 +24,23 @@ public class gameManager : MonoBehaviour
     private Label victoria;
     private Button restartButton;
     private GameObject pelotaActual;
+    private AudioSource playerAudio;
 
     private bool esperandoInput = false;
     private bool timerActivo = true;
     private float tiempoRestante = 120f; //tiempo del cronometro
     private int puntajeTotal = 0;
     private int cantidadVidas = 3;
+    private int cuentaLadrillos = 0;
 
     
     private float[] bloquePosX = {-5f, -3f, -1f, 1f, 3f, 5f}; 
 
     void Start()
     {
+
+        playerAudio = GetComponent<AudioSource>();
+
         SpawnPelota();
         CreaLadrillo();
 
@@ -84,6 +91,7 @@ public class gameManager : MonoBehaviour
             }
         }
         //##################################################
+
     }
 
     //########  PARA MANEJAR LA CANTIDAD DE VIDAS ##########
@@ -137,44 +145,64 @@ public class gameManager : MonoBehaviour
 
     //###########  PARA LA CREACION DE LADRILLOS ###########
     public void CreaLadrillo(){
+        
         for(int i = 0; i < bloquePosX.Length; i++){
             Instantiate(ladrilloAzul, new Vector2(bloquePosX[i], 2.14f), Quaternion.identity);
             Instantiate(ladrilloVerde, new Vector2(bloquePosX[i], 2.88f), Quaternion.identity);
             Instantiate(ladrilloRojo, new Vector2(bloquePosX[i], 3.62f), Quaternion.identity);
         }
+        //multiplicamos el largo del arreglo por la cantidad de instancias
+        cuentaLadrillos = bloquePosX.Length * 3;
     }
     //######################################################
 
 
-    //##############  CONTROLA EL PUNTAJE ##################
+    //#### LO QUE SUCEDE LUEGO DE DESTRUIR UN LADRILLO #####
 
     //controla el puntaje de cada ladrillo
     public void PuntoLadrilloAzul(){
+        //Descuenta 1 ladrillo cada vez que se destruye
+        cuentaLadrillos--;
+
+        //Reproduce un sonido
+        playerAudio.PlayOneShot(sonidoLadrillo, 1.0f);
+        
+        //Agregar un puntaje a la variable  
         puntajeTotal += 10;
+
+        //Actualiza el puntaje en la UI
         scoreText1.text = puntajeTotal.ToString();
-        if(puntajeTotal == 360){
+        
+        //Si la cantidad de ladrillos es cero, se gana el juego
+        if(cuentaLadrillos == 0){
             Victoria();
         }
     }
     public void PuntoLadrilloVerde(){
+        cuentaLadrillos--;
+        playerAudio.PlayOneShot(sonidoLadrillo, 1.0f);
         puntajeTotal +=  20;
         scoreText1.text = puntajeTotal.ToString();
-        if(puntajeTotal == 360){
+
+        if(cuentaLadrillos == 0){
             Victoria();
         }
+
     }
     public void PuntoLadrilloRojo(){
+        cuentaLadrillos--;
+        playerAudio.PlayOneShot(sonidoLadrillo, 1.0f);
         puntajeTotal +=  30;
         scoreText1.text = puntajeTotal.ToString();
-        if(puntajeTotal == 360){
+
+        if(cuentaLadrillos == 0){
             Victoria();
         }
     }
     //######################################################
     
     //reinicia el juego luego de presionar el boton de reiniciar
-    void ReloadScene()
-    {
+    void ReloadScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

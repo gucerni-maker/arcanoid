@@ -5,6 +5,8 @@ public class movimientoPelota : MonoBehaviour
     public float velocidad = 10f;
     private Rigidbody2D rb;
     private gameManager gm;
+    public AudioClip sonidoPaleta;//No olvidar agregar un componente Audio Source al prefab de la pelota (sin ninguna modificacion, es requerido para dar sonido)
+    private AudioSource playerAudio;
   
     void Start()
     {
@@ -12,6 +14,9 @@ public class movimientoPelota : MonoBehaviour
 
         //Nos comunicamos con el gameManager
         gm = FindFirstObjectByType<gameManager>();
+
+        //creamos el audio para el efecto de sonido del rebote
+        playerAudio = GetComponent<AudioSource>();
 
         LanzarPelota();
     }
@@ -43,6 +48,7 @@ public class movimientoPelota : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision){
         // 1. Verificamos si lo que golpeamos es la paleta
         if (collision.gameObject.CompareTag("paleta")){
+            playerAudio.PlayOneShot(sonidoPaleta, 1.0f);
             AplicarDeflexionDePaleta(collision);
         }
         else{
@@ -113,8 +119,6 @@ public class movimientoPelota : MonoBehaviour
             // 6. Aplicamos la nueva velocidad corregida
             rb.linearVelocity = new Vector2(nuevaVelocidadX, nuevaVelocidadY);
             
-            // Opcional: Un log para que veas cuándo ocurre la corrección
-            Debug.Log("Trayectoria horizontal corregida");
         }
     }   
 }
