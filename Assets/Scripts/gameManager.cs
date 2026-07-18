@@ -25,7 +25,7 @@ public class gameManager : MonoBehaviour
 
     private bool esperandoInput = false;
     private bool timerActivo = true;
-    private float tiempoRestante = 300f; //tiempo del cronometro
+    private float tiempoRestante = 120f; //tiempo del cronometro
     private int puntajeTotal = 0;
     private int cantidadVidas = 3;
 
@@ -111,6 +111,7 @@ public class gameManager : MonoBehaviour
             sinTiempo.style.display = DisplayStyle.Flex;
         }
         
+        timerActivo = false;
         cronometro.text = "00:00";
         vidasRestantes.text = "0";
         
@@ -171,18 +172,30 @@ public class gameManager : MonoBehaviour
     }
     //######################################################
     
-    //reinicia el juego
+    //reinicia el juego luego de presionar el boton de reiniciar
     void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    //########  CONTROLA LA VENTANA DE VICTORIA ############
     public void Victoria(){
+        //Destruimos la pelota y la paleta
         if (pelotaActual != null){
             Destroy(pelotaActual);
             Destroy(paletaPlayer);
             pelotaActual = null;
         }
+
+        //Mostramos el mensaje de victoria
         victoria.style.display = DisplayStyle.Flex;
+
+        //Detenemos el tiempo
+        timerActivo = false;
+        cronometro.text = "00:00";
+
+        //Mostramos el boton para reiniciar la partida
+        restartButton.style.display = DisplayStyle.Flex;
     }
+    //######################################################
 }
