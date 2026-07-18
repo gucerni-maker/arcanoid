@@ -684,6 +684,7 @@ MonoBehaviour:
   ladrilloAzul: {fileID: 658382776094537719, guid: 676e6b5fb198df1abb811cddb762136c, type: 3}
   ladrilloVerde: {fileID: 1268430314342963177, guid: 18b0ab247f17930069e8b46864ece66d, type: 3}
   ladrilloRojo: {fileID: 2116129945880364622, guid: ac8dcd3e00dfae6d2b33cab6a7bdc31f, type: 3}
+  paletaPlayer: {fileID: 1076165075}
   posicionPaleta: {fileID: 1076165079}
   uiDocument: {fileID: 1648670036}
 --- !u!4 &812207243
